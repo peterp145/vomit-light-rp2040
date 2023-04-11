@@ -3,7 +3,7 @@ from machine import SPI
 
 class PixelBuffer():
 
-    def __init__(self, length: int = 32, width: int = 1) -> None:
+    def __init__(self, length: int, width: int = 1) -> None:
         # dimensions of LED strip/array
         self.length = length
         self.width  = 1 #width
@@ -17,6 +17,11 @@ class PixelBuffer():
         for idx in range(self.length):
             self.set_pixel(idx, value)
 
+    def rotate_pixels(self, num_pixels) -> None:
+        num_pixels = num_pixels % self.length
+        pixel_buffer = self._pixel_buffer[-num_pixels*3:] + self._pixel_buffer[:-num_pixels*3]
+        self._pixel_buffer = pixel_buffer
+
     def get_pixel(self, x_pos) -> int:
         return int(self._pixel_buffer[x_pos*3:x_pos*3+3])
     
@@ -28,7 +33,7 @@ class PixelBuffer():
         return self._pixel_buffer
 
 class RgbLeds():
-    def __init__(self, spi: SPI, length: int = 32) -> None:
+    def __init__(self, spi: SPI, length: int = 29) -> None:
         self._spi = spi
         self._length = length
 
