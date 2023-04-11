@@ -1,16 +1,34 @@
+## imports ##
+# builtins
 from machine import Pin
 from machine import SPI
 from time import sleep_ms
-from rgb_leds import RgbLeds
 
-# initialize
+# my libs
+from rgb_leds import RgbLeds
+from white_leds import WhiteLEDs
+
+## initialization ##
 print("Hello, Darla!")
 
-led = Pin("LED", Pin.OUT)
-# spi = SPI(0, 400_000)
-# rgb = RgbLeds(spi)
+# peripherals
+white_led = WhiteLEDs()
+white_led.is_on = True
 
-# main loop
+spi = SPI(0, 400_000)
+rgb = RgbLeds(spi)
+
+## main loop ##
+T_SLEEP_MS = 500
 while True:
-    led.toggle()
-    sleep_ms(1000)
+    # white_led.is_on = not white_led.is_on
+    rgb.buffer.set_pixel(0,0xFF0000)
+    rgb.buffer.set_pixel(1,0x00FF00)
+    rgb.buffer.set_pixel(2,0x0000FF)
+    rgb.update()
+    sleep_ms(T_SLEEP_MS)
+
+    rgb.buffer.set_pixels(0)
+    rgb.update()
+    sleep_ms(T_SLEEP_MS)
+
