@@ -131,3 +131,4 @@ dmypy.json
 # kicad
 *-backups/
 *.bak
+*auto_saved_files*
