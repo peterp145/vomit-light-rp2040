@@ -15,12 +15,12 @@ print("Hello, Darla!")
 white_led = WhiteLEDs()
 white_led.is_on = True
 
-spi = SPI(0, 400_000)
-rgb = RgbLeds(spi)
+# spi = SPI(0, 400_000)
+# rgb = RgbLeds(spi)
 
-for idx, color in enumerate(COLOR_WHEEL_32):
-    rgb.buffer.set_pixel(idx, color)
-rgb.update()
+# for idx, color in enumerate(COLOR_WHEEL_32):
+#     rgb.buffer.set_pixel(idx, color)
+# rgb.update()
 
 ## main loop ##
 T_SLEEP_MS = 100
