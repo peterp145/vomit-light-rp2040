@@ -1,31 +1,32 @@
 ## imports ##
-# builtins
 from machine import Pin
-from machine import SPI
 from time import sleep_ms
 
-# my libs
-from rgb_leds import RgbLeds, COLOR_WHEEL_32
 from white_leds import WhiteLEDs
+
+## types and constants ##
+T_SLEEP_MS = 100
 
 ## initialization ##
 print("Hello, Darla!")
 
-# peripherals
+was_pressed = False
+mode_button = Pin(16, Pin.IN, Pin.PULL_UP)
+def callback(pin):
+    global was_pressed
+    was_pressed = True
+
+mode_button.irq(trigger=Pin.IRQ_FALLING, handler=callback)
+
 white_led = WhiteLEDs()
 white_led.is_on = True
 
-# spi = SPI(0, 400_000)
-# rgb = RgbLeds(spi)
-
-# for idx, color in enumerate(COLOR_WHEEL_32):
-#     rgb.buffer.set_pixel(idx, color)
-# rgb.update()
 
 ## main loop ##
-T_SLEEP_MS = 100
 while True:
-    # white_led.is_on = not white_led.is_on
-    rgb.buffer.rotate_pixels(1)
-    rgb.update()
+    # print(mode_button.value())
+    if was_pressed:
+        white_led.is_on = not white_led.is_on
+        was_pressed = False
+
     sleep_ms(T_SLEEP_MS)
