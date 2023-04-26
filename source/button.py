@@ -14,7 +14,7 @@ class TimedButton:
 
         if flags == Pin.IRQ_FALLING:
             self._press_tick = ticks_ms()
-            print("press")
+            # print("press")
         else:
             self._press_time_ms = ticks_diff(ticks_ms(), self._press_tick)
             print(f"held for {self._press_time_ms} ms")

@@ -1,3 +1,4 @@
 class States:
     IDLE = 0
-    SEQUENCE = 1
+    SEQUENCE1 = 1
+    SEQUENCE2 = 2
