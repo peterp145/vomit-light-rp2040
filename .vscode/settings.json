@@ -10,6 +10,6 @@
         ".vscode\\Pico-W-Stub\\stubs",
         ".vscode/Pico-W-Stub/stubs"
     ],
-    "picowgo.syncFolder": "",
+    "picowgo.syncFolder": "source",
     "picowgo.openOnStart": true
 }
